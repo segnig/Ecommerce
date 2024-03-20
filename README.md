@@ -1,6 +1,12 @@
 ## E-Commerce System
 
-This Django project implements a simple e-commerce system with the following functionalities:
+This Django project implements a simple e-commerce system using the following technologies:
+
+* **Backend:** Django (Python web framework)
+* **Frontend:**
+    * HTML (structure and content)
+    * Bootstrap (CSS framework for responsive design)
+    * JavaScript (interactivity and dynamic behavior)
 
 **Models:**
 
@@ -36,5 +42,4 @@ This Django project implements a simple e-commerce system with the following fun
 * Create customers, products, and orders through the Django admin interface.
 * Associate customers with orders and products with order items.
 * View and manage orders, order items, and shipping addresses.
-
 
