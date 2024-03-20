@@ -36,6 +36,10 @@ def cart(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request,'store/cart.html', context)
 
+
+from django.views.decorators.csrf import csrf_exempt
+
+
 def checkout(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -77,6 +81,7 @@ def updateItem(request):
 
 	return JsonResponse('Item was added', safe=False)
 
+@csrf_exempt
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
