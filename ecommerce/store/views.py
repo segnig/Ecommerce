@@ -1,10 +1,12 @@
 import datetime
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 import json
 from . utils import cookieCart, cartData, guestOrder
+from django.contrib.auth import login, authenticate, logout
 
+from django.contrib.auth.models import User
 # Create your views here.
 
 def store(request):
@@ -95,3 +97,26 @@ def processOrder(request):
         )
 
     return JsonResponse('Order was added', safe=False)
+
+
+from django.http import JsonResponse
+
+def loginPage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user, created = User.objects.get_or_create(username=username)
+        user = authenticate(request=request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('store')
+        else:
+            return redirect('login')
+        
+    context = {}
+    return render(request, 'store/login.html', context=context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('store')
+     
